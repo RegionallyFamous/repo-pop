@@ -18,6 +18,11 @@ $repo_pop_render_admin_error = static function ( $repo_pop_message ) {
 };
 
 $repo_pop_repo_url = isset( $attributes['repoUrl'] ) ? trim( (string) $attributes['repoUrl'] ) : '';
+$repo_pop_layout   = isset( $attributes['layout'] ) ? sanitize_key( (string) $attributes['layout'] ) : 'hero-stack';
+
+if ( ! in_array( $repo_pop_layout, array( 'hero-stack', 'bento-board', 'terminal-zine' ), true ) ) {
+	$repo_pop_layout = 'hero-stack';
+}
 
 if ( '' === $repo_pop_repo_url ) {
 	$repo_pop_render_admin_error( __( 'Repo Pop: add a GitHub repository URL in the block settings.', 'repo-pop' ) );
@@ -131,7 +136,7 @@ if ( $repo_pop_settings['showGitHubLink'] ) {
 }
 ?>
 
-<article <?php echo wp_kses_data( get_block_wrapper_attributes( array( 'class' => 'repo-pop-card' ) ) ); ?>>
+<article <?php echo wp_kses_data( get_block_wrapper_attributes( array( 'class' => 'repo-pop-card repo-pop-card--' . $repo_pop_layout ) ) ); ?>>
 	<div class="repo-pop-card__showcase">
 		<?php if ( $repo_pop_has_header ) : ?>
 			<header class="repo-pop-card__hero">

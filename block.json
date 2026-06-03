@@ -18,6 +18,10 @@
       "type": "string",
       "default": ""
     },
+    "layout": {
+      "type": "string",
+      "default": "hero-stack"
+    },
     "showTitle": {
       "type": "boolean",
       "default": true

@@ -16,6 +16,8 @@ Repo Pop adds a dynamic block for displaying public GitHub repositories as mini 
 
 The block can show the repository title, owner avatar, owner name, summary, homepage, language, topics, stars, forks, open issues, license, created date, updated date, last push date, default branch, visibility, archived status, and GitHub link.
 
+Choose from three layouts: Hero Stack, Bento Board, and Terminal Zine. Hero Stack is a bold landing-page replacement, Bento Board turns the same GitHub data into modular panels, and Terminal Zine gives repo pages a playful developer-console feel.
+
 GitHub responses are cached in WordPress transients for 12 hours by default.
 
 == Installation ==

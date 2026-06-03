@@ -4,6 +4,7 @@ import {
 	PanelBody,
 	TextControl,
 	ToggleControl,
+	SelectControl,
 	Placeholder,
 	Icon,
 	Notice,
@@ -52,6 +53,21 @@ const displaySections = [
 	},
 ];
 
+const layoutOptions = [
+	{
+		label: __( 'Hero Stack', 'repo-pop' ),
+		value: 'hero-stack',
+	},
+	{
+		label: __( 'Bento Board', 'repo-pop' ),
+		value: 'bento-board',
+	},
+	{
+		label: __( 'Terminal Zine', 'repo-pop' ),
+		value: 'terminal-zine',
+	},
+];
+
 function isLikelyGitHubRepoUrl( value ) {
 	const trimmed = value.trim();
 
@@ -84,6 +100,7 @@ function getDefaultValue( name ) {
 
 export default function Edit( { attributes, setAttributes } ) {
 	const repoUrl = attributes.repoUrl || '';
+	const layout = attributes.layout || getDefaultValue( 'layout' );
 	const blockProps = useBlockProps();
 	const trimmedRepoUrl = repoUrl.trim();
 	const urlIsInvalid =
@@ -121,6 +138,14 @@ export default function Edit( { attributes, setAttributes } ) {
 						) }
 					</Notice>
 				) }
+				<SelectControl
+					label={ __( 'Layout', 'repo-pop' ) }
+					value={ layout }
+					options={ layoutOptions }
+					onChange={ ( value ) => setAttributes( { layout: value } ) }
+					__nextHasNoMarginBottom
+					__next40pxDefaultSize
+				/>
 			</PanelBody>
 
 			{ displaySections.map( ( section ) => (
