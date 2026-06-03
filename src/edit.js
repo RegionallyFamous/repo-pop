@@ -19,6 +19,7 @@ const displaySections = [
 			[ 'showTitle', __( 'Show title', 'repo-pop' ) ],
 			[ 'showAvatar', __( 'Show owner avatar', 'repo-pop' ) ],
 			[ 'showOwner', __( 'Show owner name', 'repo-pop' ) ],
+			[ 'showRepoPath', __( 'Show repository path', 'repo-pop' ) ],
 		],
 	},
 	{

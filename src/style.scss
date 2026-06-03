@@ -160,6 +160,16 @@
 	overflow-wrap: anywhere;
 }
 
+.repo-pop-card__path {
+	display: inline-block;
+	width: fit-content;
+	color: var( --repo-pop-muted );
+	font-size: 0.95rem;
+	font-weight: 700;
+	line-height: 1.25;
+	overflow-wrap: anywhere;
+}
+
 .repo-pop-card__stats,
 .repo-pop-card__meta {
 	margin: 0;
@@ -213,14 +223,19 @@
 .repo-pop-card__stat-mark {
 	display: inline-grid;
 	place-items: center;
-	width: 2.4rem;
+	min-width: 2.6rem;
+	width: fit-content;
 	height: 2.4rem;
 	border-radius: 0.7rem;
+	padding: 0 0.45rem;
 	background: #249647;
 	color: #ffffff;
-	font-size: 1rem;
+	font-size: 0.9rem;
 	font-weight: 900;
 	line-height: 1;
+	overflow: visible;
+	text-align: center;
+	white-space: nowrap;
 }
 
 .repo-pop-card__stat--forks {
@@ -293,6 +308,7 @@
 		font-weight: 900;
 		line-height: 1.2;
 		letter-spacing: 0;
+		word-spacing: 0.18em;
 		text-transform: uppercase;
 
 		&::after {
@@ -432,9 +448,11 @@
 	}
 
 	.repo-pop-card__hero {
+		position: relative;
 		grid-column: span 12;
 		grid-template-columns: minmax( 0, 1fr ) minmax( 8.5rem, 10rem );
 		padding: 1.15rem;
+		min-height: 20rem;
 	}
 
 	.repo-pop-card__avatar-link {
@@ -655,6 +673,10 @@
 		font-size: 1.1rem;
 	}
 
+	.repo-pop-card__path {
+		display: none;
+	}
+
 	.repo-pop-card__stats {
 		grid-column: 1;
 		grid-row: 3 / span 4;
@@ -854,6 +876,258 @@
 
 .repo-pop__url-input {
 	min-width: min( 28rem, 100% );
+}
+
+@media ( min-width: 900px ) {
+	.wp-block-repo-pop-repository.repo-pop-card {
+		border-radius: 16px;
+	}
+
+	.wp-block-repo-pop-repository.repo-pop-card.alignwide {
+		max-width: min( 1180px, calc( 100vw - 72px ) );
+	}
+
+	.repo-pop-card__showcase {
+		gap: 1.75rem;
+		padding: 3rem;
+	}
+
+	.repo-pop-card__hero {
+		grid-template-columns: minmax( 0, 1fr ) 13rem;
+		gap: 2.5rem;
+	}
+
+	.repo-pop-card__avatar-link {
+		width: 13rem;
+	}
+
+	.repo-pop-card__heading {
+		gap: 0.45rem;
+	}
+
+	.repo-pop-card__kicker {
+		font-size: 0.9rem;
+	}
+
+	.repo-pop-card__title {
+		font-size: 5.35rem;
+	}
+
+	.repo-pop-card__owner {
+		font-size: 1.7rem;
+	}
+
+	.repo-pop-card__path {
+		font-size: 1.05rem;
+	}
+
+	.repo-pop-card__stats {
+		gap: 1.25rem;
+	}
+
+	.repo-pop-card__stat {
+		min-height: 10.6rem;
+		padding: 1.55rem;
+	}
+
+	.repo-pop-card__stat-mark {
+		min-width: 3rem;
+		height: 2.9rem;
+		font-size: 0.95rem;
+	}
+
+	.repo-pop-card__stat strong {
+		font-size: 2.85rem;
+	}
+
+	.repo-pop-card__stat span:not( .repo-pop-card__stat-mark ) {
+		font-size: 0.88rem;
+	}
+
+	.repo-pop-card__summary {
+		font-size: 1.3rem;
+		line-height: 1.62;
+	}
+
+	.repo-pop-card__topics a {
+		font-size: 0.95rem;
+		padding: 0.45rem 0.9rem;
+	}
+
+	.repo-pop-card__details {
+		gap: 1.1rem;
+		padding-top: 1.35rem;
+	}
+
+	.repo-pop-card__details h4 {
+		font-size: 1rem;
+	}
+
+	.repo-pop-card__meta-item {
+		column-gap: 0.85rem;
+		padding: 1.25rem;
+	}
+
+	.repo-pop-card__meta-mark {
+		width: 2.35rem;
+		height: 2.35rem;
+	}
+
+	.repo-pop-card__meta-label {
+		font-size: 0.78rem;
+	}
+
+	.repo-pop-card__meta strong {
+		font-size: 1.12rem;
+	}
+
+	.repo-pop-card__links {
+		padding-top: 1.35rem;
+	}
+
+	.repo-pop-card__link {
+		min-height: 3.75rem;
+		min-width: 14rem;
+		font-size: 1.1rem;
+	}
+
+	.repo-pop-card--bento-board {
+		.repo-pop-card__showcase {
+			gap: 1.25rem;
+			padding: 1.25rem;
+		}
+
+		.repo-pop-card__hero {
+			display: contents;
+			border: 0;
+			background: transparent;
+			box-shadow: none;
+			padding: 0;
+		}
+
+		.repo-pop-card__heading {
+			grid-column: 1 / span 8;
+			grid-row: 1;
+			max-width: 36rem;
+			min-height: 22rem;
+			border: 1px solid var( --repo-pop-line );
+			border-radius: 11px;
+			padding: 2rem;
+			background: rgb( 255 255 255 / 0.92 );
+			box-shadow: 0 12px 26px rgb( 7 17 31 / 0.08 );
+			z-index: 1;
+		}
+
+		.repo-pop-card__avatar-link {
+			position: relative;
+			grid-column: 1 / span 8;
+			grid-row: 1;
+			align-self: end;
+			justify-self: end;
+			width: 7.25rem;
+			margin: 0 2rem 2rem 0;
+			z-index: 2;
+		}
+
+		.repo-pop-card__stats {
+			grid-column: 9 / -1;
+			grid-row: 1;
+			grid-template-columns: 1fr;
+			gap: 1rem;
+		}
+
+		.repo-pop-card__stat {
+			min-height: 6.65rem;
+			padding: 1.15rem;
+		}
+
+		.repo-pop-card__stat strong {
+			font-size: 2rem;
+		}
+
+		.repo-pop-card__summary {
+			grid-column: 1 / span 5;
+			grid-row: 2;
+			min-height: 15rem;
+			font-size: 1.12rem;
+		}
+
+		.repo-pop-card__summary {
+			grid-column: 1 / span 8;
+			grid-row: 1;
+			align-self: end;
+			max-width: 31rem;
+			min-height: 0;
+			margin: 0 11rem 2rem 2rem;
+			border: 0;
+			padding: 0;
+			background: transparent;
+			box-shadow: none;
+			font-size: 1.02rem;
+			position: relative;
+			z-index: 2;
+		}
+
+		.repo-pop-card__summary::before {
+			display: none;
+		}
+
+		.repo-pop-card__topics {
+			grid-column: 1 / -1;
+			grid-row: 2;
+			min-height: 7rem;
+		}
+
+		.repo-pop-card__details {
+			grid-column: 1 / span 8;
+			grid-row: 3;
+		}
+
+		.repo-pop-card__links {
+			grid-column: 9 / -1;
+			grid-row: 3;
+		}
+
+		.repo-pop-card__link {
+			min-width: 0;
+		}
+	}
+
+	.repo-pop-card--terminal-zine {
+		.repo-pop-card__showcase {
+			grid-template-columns: 8.5rem minmax( 0, 1fr );
+			background: linear-gradient( 90deg, #0b1620 0 8.5rem, #ffffff 8.5rem 100% );
+		}
+
+		.repo-pop-card__showcase::before {
+			padding: 0.85rem 1.25rem;
+		}
+
+		.repo-pop-card__avatar-link {
+			width: 5rem;
+			margin-top: 2.8rem;
+		}
+
+		.repo-pop-card__heading {
+			padding: 2rem 2.35rem;
+		}
+
+		.repo-pop-card__title {
+			font-size: 5rem;
+		}
+
+		.repo-pop-card__summary,
+		.repo-pop-card__topics,
+		.repo-pop-card__details,
+		.repo-pop-card__links {
+			margin-right: 2.35rem;
+			margin-left: 2.35rem;
+		}
+
+		.repo-pop-card__summary {
+			font-size: 1.05rem;
+		}
+	}
 }
 
 @media ( max-width: 860px ) {

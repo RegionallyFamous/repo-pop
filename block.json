@@ -14,6 +14,10 @@
     "align": ["wide", "full"]
   },
   "attributes": {
+    "align": {
+      "type": "string",
+      "default": "wide"
+    },
     "repoUrl": {
       "type": "string",
       "default": ""
@@ -31,6 +35,10 @@
       "default": true
     },
     "showOwner": {
+      "type": "boolean",
+      "default": true
+    },
+    "showRepoPath": {
       "type": "boolean",
       "default": true
     },

@@ -19,9 +19,15 @@ $repo_pop_render_admin_error = static function ( $repo_pop_message ) {
 
 $repo_pop_repo_url = isset( $attributes['repoUrl'] ) ? trim( (string) $attributes['repoUrl'] ) : '';
 $repo_pop_layout   = isset( $attributes['layout'] ) ? sanitize_key( (string) $attributes['layout'] ) : 'hero-stack';
+$repo_pop_classes  = 'repo-pop-card repo-pop-card--' . $repo_pop_layout;
 
 if ( ! in_array( $repo_pop_layout, array( 'hero-stack', 'bento-board', 'terminal-zine' ), true ) ) {
 	$repo_pop_layout = 'hero-stack';
+	$repo_pop_classes = 'repo-pop-card repo-pop-card--' . $repo_pop_layout;
+}
+
+if ( empty( $attributes['align'] ) ) {
+	$repo_pop_classes .= ' alignwide';
 }
 
 if ( '' === $repo_pop_repo_url ) {
@@ -47,6 +53,7 @@ if ( is_wp_error( $repo_pop_repo ) ) {
 }
 
 $repo_pop_repo_name     = ! empty( $repo_pop_repo['name'] ) ? (string) $repo_pop_repo['name'] : (string) $repo_pop_parsed['repo'];
+$repo_pop_full_name     = ! empty( $repo_pop_repo['fullName'] ) ? (string) $repo_pop_repo['fullName'] : (string) $repo_pop_parsed['full_name'];
 $repo_pop_repo_url      = ! empty( $repo_pop_repo['url'] ) ? (string) $repo_pop_repo['url'] : 'https://github.com/' . rawurlencode( $repo_pop_parsed['owner'] ) . '/' . rawurlencode( $repo_pop_parsed['repo'] );
 $repo_pop_owner         = isset( $repo_pop_repo['owner'] ) && is_array( $repo_pop_repo['owner'] ) ? $repo_pop_repo['owner'] : array();
 $repo_pop_owner_name    = ! empty( $repo_pop_owner['login'] ) ? (string) $repo_pop_owner['login'] : (string) $repo_pop_parsed['owner'];
@@ -168,7 +175,7 @@ if ( $repo_pop_settings['showGitHubLink'] ) {
 }
 ?>
 
-<article <?php echo wp_kses_data( get_block_wrapper_attributes( array( 'class' => 'repo-pop-card repo-pop-card--' . $repo_pop_layout ) ) ); ?>>
+<article <?php echo wp_kses_data( get_block_wrapper_attributes( array( 'class' => $repo_pop_classes ) ) ); ?>>
 	<div class="repo-pop-card__showcase">
 		<?php if ( $repo_pop_has_header ) : ?>
 			<header class="repo-pop-card__hero">
@@ -201,6 +208,9 @@ if ( $repo_pop_settings['showGitHubLink'] ) {
 								<a class="repo-pop-card__owner" href="<?php echo esc_url( $repo_pop_owner_url ); ?>" target="_blank" rel="noopener noreferrer">
 									<?php echo esc_html( $repo_pop_owner_name ); ?>
 								</a>
+								<?php if ( $repo_pop_settings['showRepoPath'] && '' !== $repo_pop_full_name ) : ?>
+									<span class="repo-pop-card__path"><?php echo esc_html( 'github.com/' . $repo_pop_full_name ); ?></span>
+								<?php endif; ?>
 							<?php endif; ?>
 						</div>
 					<?php endif; ?>

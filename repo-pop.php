@@ -46,6 +46,7 @@ function repo_pop_display_defaults() {
 		'showTitle'         => true,
 		'showAvatar'        => true,
 		'showOwner'         => true,
+		'showRepoPath'      => true,
 		'showSummary'       => true,
 		'showHomepage'      => true,
 		'showLanguage'      => true,
