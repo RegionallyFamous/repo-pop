@@ -63,37 +63,65 @@ if ( $repo_pop_license ) {
 
 $repo_pop_stat_items = array();
 $repo_pop_meta_items = array();
+$repo_pop_short_mark = static function ( $repo_pop_value ) {
+	$repo_pop_known_marks = array(
+		'css'        => 'CSS',
+		'go'         => 'GO',
+		'html'       => 'HTML',
+		'java'       => 'JAVA',
+		'javascript' => 'JS',
+		'php'        => 'PHP',
+		'python'     => 'PY',
+		'ruby'       => 'RB',
+		'rust'       => 'RS',
+		'shell'      => 'SH',
+		'typescript' => 'TS',
+	);
+	$repo_pop_key = strtolower( trim( (string) $repo_pop_value ) );
+
+	if ( isset( $repo_pop_known_marks[ $repo_pop_key ] ) ) {
+		return $repo_pop_known_marks[ $repo_pop_key ];
+	}
+
+	$repo_pop_mark = preg_replace( '/[^A-Za-z0-9]/', '', (string) $repo_pop_value );
+
+	if ( '' === $repo_pop_mark ) {
+		return 'I';
+	}
+
+	return strtoupper( substr( $repo_pop_mark, 0, 3 ) );
+};
 
 if ( $repo_pop_settings['showLanguage'] && ! empty( $repo_pop_repo['language'] ) ) {
-	$repo_pop_meta_items[] = array( __( 'Language', 'repo-pop' ), (string) $repo_pop_repo['language'] );
+	$repo_pop_meta_items[] = array( 'language', __( 'Language', 'repo-pop' ), (string) $repo_pop_repo['language'], $repo_pop_short_mark( $repo_pop_repo['language'] ) );
 }
 
 if ( $repo_pop_settings['showStars'] ) {
-	$repo_pop_stat_items[] = array( __( 'Stars', 'repo-pop' ), repo_pop_format_number( $repo_pop_repo['stars'] ?? 0 ) );
+	$repo_pop_stat_items[] = array( 'stars', __( 'Stars', 'repo-pop' ), repo_pop_format_number( $repo_pop_repo['stars'] ?? 0 ), 'ST' );
 }
 
 if ( $repo_pop_settings['showForks'] ) {
-	$repo_pop_stat_items[] = array( __( 'Forks', 'repo-pop' ), repo_pop_format_number( $repo_pop_repo['forks'] ?? 0 ) );
+	$repo_pop_stat_items[] = array( 'forks', __( 'Forks', 'repo-pop' ), repo_pop_format_number( $repo_pop_repo['forks'] ?? 0 ), 'FK' );
 }
 
 if ( $repo_pop_settings['showOpenIssues'] ) {
-	$repo_pop_stat_items[] = array( __( 'Open issues', 'repo-pop' ), repo_pop_format_number( $repo_pop_repo['openIssues'] ?? 0 ) );
+	$repo_pop_stat_items[] = array( 'issues', __( 'Open issues', 'repo-pop' ), repo_pop_format_number( $repo_pop_repo['openIssues'] ?? 0 ), '!' );
 }
 
 if ( $repo_pop_settings['showLicense'] && '' !== $repo_pop_license_label ) {
-	$repo_pop_meta_items[] = array( __( 'License', 'repo-pop' ), $repo_pop_license_label );
+	$repo_pop_meta_items[] = array( 'license', __( 'License', 'repo-pop' ), $repo_pop_license_label, 'LIC' );
 }
 
 if ( $repo_pop_settings['showDefaultBranch'] && ! empty( $repo_pop_repo['defaultBranch'] ) ) {
-	$repo_pop_meta_items[] = array( __( 'Default branch', 'repo-pop' ), (string) $repo_pop_repo['defaultBranch'] );
+	$repo_pop_meta_items[] = array( 'branch', __( 'Default branch', 'repo-pop' ), (string) $repo_pop_repo['defaultBranch'], 'BR' );
 }
 
 if ( $repo_pop_settings['showVisibility'] && ! empty( $repo_pop_repo['visibility'] ) ) {
-	$repo_pop_meta_items[] = array( __( 'Visibility', 'repo-pop' ), ucfirst( (string) $repo_pop_repo['visibility'] ) );
+	$repo_pop_meta_items[] = array( 'visibility', __( 'Visibility', 'repo-pop' ), ucfirst( (string) $repo_pop_repo['visibility'] ), 'VIS' );
 }
 
 if ( $repo_pop_settings['showArchived'] ) {
-	$repo_pop_meta_items[] = array( __( 'Archived', 'repo-pop' ), ! empty( $repo_pop_repo['archived'] ) ? __( 'Yes', 'repo-pop' ) : __( 'No', 'repo-pop' ) );
+	$repo_pop_meta_items[] = array( 'archived', __( 'Archived', 'repo-pop' ), ! empty( $repo_pop_repo['archived'] ) ? __( 'Yes', 'repo-pop' ) : __( 'No', 'repo-pop' ), 'ARC' );
 }
 
 $repo_pop_created_at = repo_pop_format_date( $repo_pop_repo['createdAt'] ?? '' );
@@ -101,15 +129,15 @@ $repo_pop_updated_at = repo_pop_format_date( $repo_pop_repo['updatedAt'] ?? '' )
 $repo_pop_pushed_at  = repo_pop_format_date( $repo_pop_repo['pushedAt'] ?? '' );
 
 if ( $repo_pop_settings['showCreatedAt'] && '' !== $repo_pop_created_at ) {
-	$repo_pop_meta_items[] = array( __( 'Created', 'repo-pop' ), $repo_pop_created_at );
+	$repo_pop_meta_items[] = array( 'created', __( 'Created', 'repo-pop' ), $repo_pop_created_at, 'NEW' );
 }
 
 if ( $repo_pop_settings['showUpdatedAt'] && '' !== $repo_pop_updated_at ) {
-	$repo_pop_meta_items[] = array( __( 'Updated', 'repo-pop' ), $repo_pop_updated_at );
+	$repo_pop_meta_items[] = array( 'updated', __( 'Updated', 'repo-pop' ), $repo_pop_updated_at, 'UPD' );
 }
 
 if ( $repo_pop_settings['showPushedAt'] && '' !== $repo_pop_pushed_at ) {
-	$repo_pop_meta_items[] = array( __( 'Last push', 'repo-pop' ), $repo_pop_pushed_at );
+	$repo_pop_meta_items[] = array( 'pushed', __( 'Last push', 'repo-pop' ), $repo_pop_pushed_at, 'PUSH' );
 }
 
 $repo_pop_has_header = ( $repo_pop_settings['showAvatar'] && ! empty( $repo_pop_owner['avatarUrl'] ) ) || $repo_pop_settings['showTitle'] || $repo_pop_settings['showOwner'];
@@ -123,15 +151,19 @@ if ( '' !== $repo_pop_owner_name ) {
 
 if ( $repo_pop_settings['showHomepage'] && ! empty( $repo_pop_repo['homepage'] ) ) {
 	$repo_pop_links[] = array(
+		'key'   => 'homepage',
 		'url'   => (string) $repo_pop_repo['homepage'],
 		'label' => __( 'Homepage', 'repo-pop' ),
+		'mark'  => 'www',
 	);
 }
 
 if ( $repo_pop_settings['showGitHubLink'] ) {
 	$repo_pop_links[] = array(
+		'key'   => 'github',
 		'url'   => $repo_pop_repo_url,
 		'label' => __( 'View on GitHub', 'repo-pop' ),
+		'mark'  => 'git',
 	);
 }
 ?>
@@ -177,9 +209,10 @@ if ( $repo_pop_settings['showGitHubLink'] ) {
 				<?php if ( ! empty( $repo_pop_stat_items ) ) : ?>
 					<ul class="repo-pop-card__stats">
 						<?php foreach ( $repo_pop_stat_items as $repo_pop_item ) : ?>
-							<li>
-								<strong><?php echo esc_html( $repo_pop_item[1] ); ?></strong>
-								<span><?php echo esc_html( $repo_pop_item[0] ); ?></span>
+							<li class="repo-pop-card__stat repo-pop-card__stat--<?php echo esc_attr( sanitize_html_class( $repo_pop_item[0] ) ); ?>">
+								<span class="repo-pop-card__stat-mark" aria-hidden="true"><?php echo esc_html( $repo_pop_item[3] ); ?></span>
+								<strong><?php echo esc_html( $repo_pop_item[2] ); ?></strong>
+								<span><?php echo esc_html( $repo_pop_item[1] ); ?></span>
 							</li>
 						<?php endforeach; ?>
 					</ul>
@@ -212,9 +245,10 @@ if ( $repo_pop_settings['showGitHubLink'] ) {
 				<h4><?php esc_html_e( 'Project facts', 'repo-pop' ); ?></h4>
 				<ul class="repo-pop-card__meta">
 					<?php foreach ( $repo_pop_meta_items as $repo_pop_item ) : ?>
-						<li>
-							<span><?php echo esc_html( $repo_pop_item[0] ); ?></span>
-							<strong><?php echo esc_html( $repo_pop_item[1] ); ?></strong>
+						<li class="repo-pop-card__meta-item repo-pop-card__meta-item--<?php echo esc_attr( sanitize_html_class( $repo_pop_item[0] ) ); ?>">
+							<span class="repo-pop-card__meta-mark" aria-hidden="true"><?php echo esc_html( $repo_pop_item[3] ); ?></span>
+							<span class="repo-pop-card__meta-label"><?php echo esc_html( $repo_pop_item[1] ); ?></span>
+							<strong><?php echo esc_html( $repo_pop_item[2] ); ?></strong>
 						</li>
 					<?php endforeach; ?>
 				</ul>
@@ -224,7 +258,8 @@ if ( $repo_pop_settings['showGitHubLink'] ) {
 		<?php if ( ! empty( $repo_pop_links ) ) : ?>
 			<footer class="repo-pop-card__links">
 				<?php foreach ( $repo_pop_links as $repo_pop_link ) : ?>
-					<a href="<?php echo esc_url( $repo_pop_link['url'] ); ?>" target="_blank" rel="noopener noreferrer">
+					<a class="repo-pop-card__link repo-pop-card__link--<?php echo esc_attr( sanitize_html_class( $repo_pop_link['key'] ) ); ?>" href="<?php echo esc_url( $repo_pop_link['url'] ); ?>" target="_blank" rel="noopener noreferrer">
+						<span class="repo-pop-card__link-mark" aria-hidden="true"><?php echo esc_html( $repo_pop_link['mark'] ); ?></span>
 						<?php echo esc_html( $repo_pop_link['label'] ); ?>
 					</a>
 				<?php endforeach; ?>
