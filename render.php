@@ -104,11 +104,11 @@ if ( $repo_pop_settings['showLanguage'] && ! empty( $repo_pop_repo['language'] )
 }
 
 if ( $repo_pop_settings['showStars'] ) {
-	$repo_pop_stat_items[] = array( 'stars', __( 'Stars', 'repo-pop' ), repo_pop_format_number( $repo_pop_repo['stars'] ?? 0 ), 'ST' );
+	$repo_pop_stat_items[] = array( 'stars', __( 'Stars', 'repo-pop' ), repo_pop_format_number( $repo_pop_repo['stars'] ?? 0 ), '*' );
 }
 
 if ( $repo_pop_settings['showForks'] ) {
-	$repo_pop_stat_items[] = array( 'forks', __( 'Forks', 'repo-pop' ), repo_pop_format_number( $repo_pop_repo['forks'] ?? 0 ), 'FK' );
+	$repo_pop_stat_items[] = array( 'forks', __( 'Forks', 'repo-pop' ), repo_pop_format_number( $repo_pop_repo['forks'] ?? 0 ), '<>' );
 }
 
 if ( $repo_pop_settings['showOpenIssues'] ) {
