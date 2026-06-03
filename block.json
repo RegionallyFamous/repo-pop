@@ -1,0 +1,97 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "repo-pop/repository",
+  "version": "0.1.0",
+  "title": "Repo Pop",
+  "category": "widgets",
+  "icon": "editor-code",
+  "description": "Turn a public GitHub repository into a playful project showcase.",
+  "keywords": ["github", "repository", "repo", "embed"],
+  "textdomain": "repo-pop",
+  "supports": {
+    "html": false,
+    "align": ["wide", "full"]
+  },
+  "attributes": {
+    "repoUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "showTitle": {
+      "type": "boolean",
+      "default": true
+    },
+    "showAvatar": {
+      "type": "boolean",
+      "default": true
+    },
+    "showOwner": {
+      "type": "boolean",
+      "default": true
+    },
+    "showSummary": {
+      "type": "boolean",
+      "default": true
+    },
+    "showHomepage": {
+      "type": "boolean",
+      "default": true
+    },
+    "showLanguage": {
+      "type": "boolean",
+      "default": true
+    },
+    "showTopics": {
+      "type": "boolean",
+      "default": true
+    },
+    "showStars": {
+      "type": "boolean",
+      "default": true
+    },
+    "showForks": {
+      "type": "boolean",
+      "default": true
+    },
+    "showOpenIssues": {
+      "type": "boolean",
+      "default": true
+    },
+    "showLicense": {
+      "type": "boolean",
+      "default": true
+    },
+    "showCreatedAt": {
+      "type": "boolean",
+      "default": true
+    },
+    "showUpdatedAt": {
+      "type": "boolean",
+      "default": true
+    },
+    "showPushedAt": {
+      "type": "boolean",
+      "default": true
+    },
+    "showDefaultBranch": {
+      "type": "boolean",
+      "default": true
+    },
+    "showVisibility": {
+      "type": "boolean",
+      "default": true
+    },
+    "showArchived": {
+      "type": "boolean",
+      "default": true
+    },
+    "showGitHubLink": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "editorScript": "file:./build/index.js",
+  "style": "file:./build/style-index.css",
+  "render": "file:./render.php"
+}

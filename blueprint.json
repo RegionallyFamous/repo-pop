@@ -1,0 +1,35 @@
+{
+  "$schema": "https://playground.wordpress.net/blueprint-schema.json",
+  "landingPage": "/repo-pop-demo/",
+  "preferredVersions": {
+    "php": "8.4",
+    "wp": "latest"
+  },
+  "features": {
+    "networking": true
+  },
+  "steps": [
+    {
+      "step": "login",
+      "username": "admin",
+      "password": "password"
+    },
+    {
+      "step": "installPlugin",
+      "pluginData": {
+        "resource": "git:directory",
+        "url": "https://github.com/RegionallyFamous/repo-pop",
+        "ref": "main",
+        "refType": "branch"
+      },
+      "options": {
+        "activate": true,
+        "targetFolderName": "repo-pop"
+      }
+    },
+    {
+      "step": "runPHP",
+      "code": "<?php require_once('/wordpress/wp-load.php'); $content = '<!-- wp:repo-pop/repository {\"repoUrl\":\"https://github.com/WordPress/gutenberg\"} /-->'; $existing = get_page_by_path('repo-pop-demo'); $post = array('post_title' => 'Repo Pop Demo', 'post_name' => 'repo-pop-demo', 'post_type' => 'page', 'post_status' => 'publish', 'post_content' => $content); if ($existing) { $post['ID'] = $existing->ID; wp_update_post($post); } else { wp_insert_post($post); } update_option('permalink_structure', '/%postname%/'); flush_rewrite_rules();"
+    }
+  ]
+}
