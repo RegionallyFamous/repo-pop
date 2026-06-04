@@ -10,16 +10,17 @@
 	--repo-pop-peach: #fff0e8;
 
 	box-sizing: border-box;
+	position: relative;
 	width: 100%;
-	max-width: min( 760px, calc( 100vw - 48px ) );
+	max-width: min( 1120px, calc( 100vw - 48px ) );
 	margin-right: auto;
 	margin-left: auto;
 	overflow: hidden;
-	border: 1px solid var( --repo-pop-line );
-	border-radius: 12px;
+	border: 2px solid #d7e1ec;
+	border-radius: 10px;
 	background: #ffffff;
 	color: var( --repo-pop-ink );
-	box-shadow: 0 24px 70px rgb( 7 17 31 / 0.16 );
+	box-shadow: 0 28px 70px rgb( 7 17 31 / 0.16 );
 
 	*,
 	*::before,
@@ -38,11 +39,19 @@
 	}
 }
 
+.wp-block-repo-pop-repository.repo-pop-card--hero-stack::before {
+	content: "";
+	position: absolute;
+	inset: 0 auto 0 0;
+	width: 9px;
+	background: linear-gradient( 180deg, #9ee8bd 0%, #dff9ea 54%, #9ee8bd 100% );
+}
+
 .repo-pop-card__showcase {
 	display: grid;
 	grid-template-columns: repeat( 12, minmax( 0, 1fr ) );
-	gap: 18px 22px;
-	padding: 28px;
+	gap: 22px 24px;
+	padding: 38px 42px 36px 50px;
 	background: #ffffff;
 }
 
@@ -52,7 +61,7 @@
 }
 
 .repo-pop-card__heading {
-	grid-column: 1 / span 8;
+	grid-column: 1 / span 7;
 	grid-row: 1;
 	display: grid;
 	gap: 4px;
@@ -65,6 +74,7 @@
 	align-items: center;
 	gap: 7px;
 	width: fit-content;
+	margin-bottom: 4px;
 	color: var( --repo-pop-green );
 	font-size: 13px;
 	font-weight: 900;
@@ -88,7 +98,7 @@
 .repo-pop-card__title {
 	margin: 0;
 	color: var( --repo-pop-ink );
-	font-size: 62px;
+	font-size: clamp( 54px, 6vw, 78px );
 	font-weight: 900;
 	line-height: 0.98;
 	letter-spacing: 0;
@@ -103,7 +113,7 @@
 	display: inline-block;
 	width: fit-content;
 	color: var( --repo-pop-blue );
-	font-size: 22px;
+	font-size: clamp( 22px, 2.4vw, 30px );
 	font-weight: 750;
 	line-height: 1.15;
 	overflow-wrap: anywhere;
@@ -125,11 +135,11 @@
 	grid-row: 1 / span 2;
 	display: inline-grid;
 	place-items: center;
-	justify-self: center;
+	justify-self: end;
 	align-self: start;
-	width: 148px;
+	width: clamp( 150px, 16vw, 190px );
 	aspect-ratio: 1;
-	border: 7px solid transparent;
+	border: 8px solid transparent;
 	border-radius: 50%;
 	background:
 		linear-gradient( #ffffff, #ffffff ) padding-box,
@@ -162,13 +172,13 @@
 .repo-pop-card__summary {
 	grid-column: 1 / span 8;
 	grid-row: 2;
-	max-width: 47rem;
-	border: 0;
-	padding: 0;
+	max-width: 56rem;
+	border-left: 6px solid var( --repo-pop-green );
+	padding: 3px 0 3px 22px;
 	color: var( --repo-pop-ink );
-	font-size: 16px;
+	font-size: clamp( 17px, 1.45vw, 21px );
 	font-weight: 500;
-	line-height: 1.58;
+	line-height: 1.55;
 
 	p {
 		margin: 0;
@@ -197,13 +207,13 @@
 .repo-pop-card__stat {
 	display: grid;
 	align-content: end;
-	min-height: 128px;
+	min-height: 136px;
 	min-width: 0;
-	border: 1px solid #e7edf3;
-	border-radius: 9px;
-	padding: 20px;
+	border: 1px solid #dfe9e4;
+	border-radius: 12px;
+	padding: 22px;
 	background: var( --repo-pop-mint );
-	box-shadow: 0 14px 28px rgb( 7 17 31 / 0.08 );
+	box-shadow: inset 0 0 0 1px rgb( 255 255 255 / 0.7 ), 0 14px 30px rgb( 7 17 31 / 0.09 );
 }
 
 .repo-pop-card__stat--forks {
@@ -217,12 +227,13 @@
 .repo-pop-card__stat-mark {
 	display: inline-grid;
 	place-items: center;
-	width: 38px;
-	height: 38px;
-	border-radius: 11px;
-	background: #229647;
-	color: #ffffff;
-	font-size: 15px;
+	width: 42px;
+	height: 42px;
+	border: 2px solid currentColor;
+	border-radius: 12px;
+	background: #ffffff;
+	color: #16833f;
+	font-size: 20px;
 	font-weight: 900;
 	line-height: 1;
 	text-align: center;
@@ -230,18 +241,18 @@
 }
 
 .repo-pop-card__stat--forks .repo-pop-card__stat-mark {
-	background: #2e6dd8;
+	color: #2e6dd8;
 }
 
 .repo-pop-card__stat--issues .repo-pop-card__stat-mark {
-	background: #f35d34;
+	color: #f35d34;
 }
 
 .repo-pop-card__stat strong {
 	display: block;
 	margin-top: 12px;
 	color: var( --repo-pop-ink );
-	font-size: 34px;
+	font-size: clamp( 34px, 3.4vw, 48px );
 	font-weight: 900;
 	line-height: 1;
 	letter-spacing: 0;
@@ -251,7 +262,7 @@
 	display: block;
 	margin-top: 4px;
 	color: #314356;
-	font-size: 12px;
+	font-size: 13px;
 	font-weight: 900;
 	line-height: 1.2;
 	letter-spacing: 0;
@@ -264,6 +275,7 @@
 	display: flex;
 	flex-wrap: wrap;
 	gap: 8px;
+	margin-top: 2px;
 }
 
 .repo-pop-card__topics a {
@@ -272,10 +284,10 @@
 	max-width: 100%;
 	border: 1.5px solid #74a8ff;
 	border-radius: 999px;
-	padding: 6px 12px;
+	padding: 7px 14px;
 	background: #ffffff;
 	color: var( --repo-pop-blue );
-	font-size: 13px;
+	font-size: 14px;
 	font-weight: 800;
 	line-height: 1.15;
 	overflow-wrap: anywhere;
@@ -286,16 +298,16 @@
 	grid-column: 1 / -1;
 	grid-row: 5;
 	display: grid;
-	gap: 16px;
+	gap: 18px;
 	border-top: 1px dashed #b8c2ce;
-	padding-top: 18px;
+	padding-top: 22px;
 }
 
 .repo-pop-card__details h4 {
 	width: fit-content;
 	margin: 0;
 	color: var( --repo-pop-green );
-	font-size: 14px;
+	font-size: 15px;
 	font-weight: 900;
 	line-height: 1.2;
 	letter-spacing: 0;
@@ -316,8 +328,8 @@
 .repo-pop-card__meta {
 	display: grid;
 	grid-template-columns: repeat( 3, minmax( 0, 1fr ) );
-	border: 1px solid var( --repo-pop-soft-line );
-	border-width: 1px 0 0 1px;
+	gap: 10px;
+	border: 0;
 }
 
 .repo-pop-card__meta-item {
@@ -327,10 +339,10 @@
 	column-gap: 12px;
 	row-gap: 2px;
 	min-width: 0;
-	border: 1px solid var( --repo-pop-soft-line );
-	border-width: 0 1px 1px 0;
-	padding: 16px;
-	background: rgb( 255 255 255 / 0.72 );
+	border: 1px solid #e3ece6;
+	border-radius: 10px;
+	padding: 15px;
+	background: linear-gradient( 180deg, #ffffff, #fbfefc );
 }
 
 .repo-pop-card__meta-mark {
@@ -372,7 +384,7 @@
 	flex-wrap: wrap;
 	gap: 16px;
 	border-top: 1px solid #d7e0ea;
-	padding-top: 17px;
+	padding-top: 20px;
 }
 
 .repo-pop-card__link {
@@ -380,7 +392,7 @@
 	align-items: center;
 	justify-content: center;
 	min-height: 54px;
-	min-width: min( 208px, 100% );
+	min-width: min( 220px, 100% );
 	border: 2px solid #0b63ce;
 	border-radius: 8px;
 	padding: 12px 18px;
